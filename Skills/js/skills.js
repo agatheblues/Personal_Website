@@ -1,11 +1,11 @@
 var dataset = [
 	{
-	 "section": "Web",
+	 "section": "Cake",
 	 "skills": [
-	      {"name": "HTML","level": 10},
-	      {"name": "CSS","level": 20},
-	      {"name": "JS","level": 30},
-	      {"name": "d3.js","level": 40}
+	      {"name": "Cookies","level": 10},
+	      {"name": "Pies","level": 20},
+	      {"name": "Ice Cream","level": 30},
+	      {"name": "Pancakes","level": 40}
 	  ]
   },
 	{
@@ -18,38 +18,38 @@ var dataset = [
 	  ]
   },
 	{
-	 "section": "Office",
+	 "section": "Colors",
 	 "skills": [
-	      {"name": "Word","level": 90},
-	      {"name": "Access","level": 100},
-	      {"name": "Excel","level": 30},
-	      {"name": "PowerPoint","level": 10}
+	      {"name": "Red","level": 90},
+	      {"name": "Orange","level": 100},
+	      {"name": "Yellow","level": 30},
+	      {"name": "White","level": 10}
 	  ]
 	},
   	{
-  	 "section": "Atlassian",
+  	 "section": "Drinks",
   	 "skills": [
-  	      {"name": "Jira","level": 70},
-  	      {"name": "Confluence","level": 100},
-  	      {"name": "Sourcetree","level": 20}
+  	      {"name": "Wine","level": 70},
+  	      {"name": "Beer","level": 100},
+  	      {"name": "Lemonade","level": 20}
   	  ]
   },
 	{
-	 "section": "Various",
+	 "section": "Animals",
 	 "skills": [
-	      {"name": "VBA","level": 50},
-	      {"name": "VBE","level": 40},
-	      {"name": "R","level": 5}
+	      {"name": "Cats","level": 50},
+	      {"name": "Dog","level": 40},
+	      {"name": "Cow","level": 5}
 	  ]
 	},
   {
-   "section": "Test",
+   "section": "Exploding kittens",
    "skills": [
-		{"name": "Chocopepite","level": 80},
-		{"name": "Fraise","level": 50},
-		{"name": "Comme","level": 80},
-		{"name": "Tu veux","level": 50},
-		{"name": "Bloup","level": 20}
+		{"name": "Defuse","level": 100},
+		{"name": "Nope","level": 50},
+		{"name": "See the future","level": 80},
+		{"name": "Shuffle","level": 50},
+		{"name": "Pairs","level": 20}
 	]
   }
 ];
