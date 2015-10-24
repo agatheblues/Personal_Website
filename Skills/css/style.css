@@ -1,34 +1,25 @@
-
-@font-face {
-font-family: BebasNeueRegular;
-src: url('font/BebasNeueRegular.otf') format('opentype');
-}
-@font-face {
-font-family: BebasNeueThin;
-src: url('font/BebasNeueThin.otf') format('opentype');
-}
-@font-face {
-font-family: BebasNeueLight;
-src: url('font/BebasNeueLight.otf') format('opentype');
-}
+@import url(https://fonts.googleapis.com/css?family=Khula:400,300,600,700,800);
 
 
 svg {
     margin: auto;
     display:block;
+    font-family: 'Khula', sans-serif;
+    font-weight:400;
 }
 
 .axis path, .axis line {
     fill: none;
-    stroke: black;
+    stroke: #ABB7B7;
     stroke-width: 1;
 }
 
 .axis text {
-    font-family: Helvetica;
     font-size: 10px;
 }
 
-rect {
-    fill : blue;
+
+
+.skillContainer {
+    display : block;
 }

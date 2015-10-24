@@ -1,18 +1,52 @@
 {
- "name": "Web",
+ "section": "Web",
  "skills": [
       {"name": "HTML","level": 10},
       {"name": "CSS","level": 20},
       {"name": "JS","level": 30},
       {"name": "d3.js","level": 40}
   ]
-}
+},
 {
- "name": "Adobe",
+ "section": "Adobe",
  "skills": [
       {"name": "Photoshop","level": 50},
       {"name": "Premiere Pro","level": 60},
       {"name": "After Effects","level": 70},
       {"name": "In Design","level": 80}
   ]
+},
+{
+ "section": "Office",
+ "skills": [
+      {"name": "Word","level": 90},
+      {"name": "Access","level": 100},
+      {"name": "Excel","level": 30},
+      {"name": "PowerPoint","level": 10}
+  ]
+},
+{
+ "section": "Atlassian",
+ "skills": [
+      {"name": "Jira","level": 70},
+      {"name": "Confluence","level": 100},
+      {"name": "Sourcetree","level": 20}
+  ]
+},
+{
+ "section": "Various",
+ "skills": [
+      {"name": "VBA","level": 50},
+      {"name": "Selenium Webdriver","level": 50}
+  ]
+},
+{
+"section": "Test",
+"skills": [
+    {"name": "Chocopepite","level": 80},
+    {"name": "Fraise","level": 50},
+    {"name": "Comme","level": 80},
+    {"name": "Tu veux","level": 50},
+    {"name": "Bloup","level": 20}
+]
 }

@@ -38,7 +38,8 @@ var dataset = [
 	 "section": "Various",
 	 "skills": [
 	      {"name": "VBA","level": 50},
-	      {"name": "Selenium Webdriver","level": 50}
+	      {"name": "Selenium Webdriver","level": 40},
+	      {"name": "R","level": 5}
 	  ]
 	},
   {
@@ -55,9 +56,9 @@ var dataset = [
 
 //Width and height
 var w = 400;
-var h = 600;
+var h = 500;
 var barHeight = 8;
-var paddingSection = 20;
+var paddingSection = 5;
 var paddingLeft = w/3;
 
 var skills = d3.select('#chart')
@@ -73,6 +74,10 @@ var xScale =  d3.scale.linear()
                         .domain([0,100])
                         .range([0,w/2]);
 
+var colorScale=d3.scale.linear()
+                    .domain([0,100])
+                    .rangeRound([200,100]);
+
 //Create one scale Y function for each section
 var yScales = [];
 var yAxisDefs = [];
@@ -84,12 +89,13 @@ dataset.forEach(function(item){
 			domain.push(skill.name);
 		});
 
-		//var sectionHeight = barHeight*(item.skills.length) + paddingSection;
+		var sectionHeight = (barHeight + paddingSection)*(item.skills.length); //Height of the section and inbetween. paddingSection needs to be in factor of the number of skills to represent;
+																			   //otherwise a section with few skills will have more whitespace than one with lot of skills.
 
 		//Create scale per section
         var yScale =  d3.scale.ordinal()
 		                        .domain(domain)
-		                        .rangeBands([0,barHeight*(item.skills.length)], 0.4,0.2); //barHeight*(item.skills.length)
+		                        .rangeBands([0,sectionHeight], 0.4,0.2); //barHeight*(item.skills.length)
 
 		//Define Y axis based on scale per section
 		var yAxisDef = d3.svg.axis()
@@ -109,9 +115,12 @@ var skillContainer = d3.select('#skills').selectAll('g')
 											.append('g')
 											.each(function(d, i) { d.index = i; }) //Need the index to be accessible from children node later
 											.attr('class',function(d){return d.section + ' skillContainer';})
-											.attr('transform',function(d,i){return 'translate(0,'+ i*h/dataset.length +')';})
 												.append('g')
 												.attr('class','bars');
+
+d3.selectAll('g.skillContainer').transition()
+	                .duration(1000)
+					.attr('transform',function(d,i){return 'translate(0,'+ i*h/dataset.length +')';});
 
 //Create bars
 var skillBars = skillContainer.selectAll('g.bars')
@@ -120,8 +129,15 @@ var skillBars = skillContainer.selectAll('g.bars')
   								.append('rect')
 									.attr("x",0)
 				                   	.attr("y", function(d,i) { return yScales[d3.select(this.parentNode).datum().index](d.name); }) //i = index of the skills so 0 1 2 3 0 1 2 3 etc. We need the parent node index to call the same yScale for the whole section.
-				                   	.attr("height",function(d,i){ return yScales[d3.select(this.parentNode).datum().index].rangeBand();})
-				                   	.attr("width", function(d){return xScale(d.level);});
+				                   	.attr("height",barHeight) //function(d,i){ return yScales[d3.select(this.parentNode).datum().index].rangeBand();}
+				                   	.attr("width", 0)
+									.attr('fill',function(d){return 'rgb(100,'+colorScale(d.level)+','+colorScale(d.level)+')';})
+									.transition()
+						                .duration(1000)
+						                .delay(function(d,i){
+						                    return 950+i*50;
+						                })
+										.attr("width", function(d){return xScale(d.level);});
 
 //Create axis
 var yAxis = d3.selectAll('g.skillContainer')
