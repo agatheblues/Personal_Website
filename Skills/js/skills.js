@@ -11,10 +11,10 @@ var dataset = [
 	{
 	 "section": "Adobe",
 	 "skills": [
-	      {"name": "Photoshop","level": 50},
-	      {"name": "Premiere Pro","level": 60},
-	      {"name": "After Effects","level": 70},
-	      {"name": "In Design","level": 80}
+	      {"name": "Photoshop","level": 30},
+	      {"name": "Premiere Pro","level": 20},
+	      {"name": "After Effects","level": 80},
+	      {"name": "In Design","level": 10}
 	  ]
   },
 	{
@@ -38,7 +38,7 @@ var dataset = [
 	 "section": "Various",
 	 "skills": [
 	      {"name": "VBA","level": 50},
-	      {"name": "Selenium Webdriver","level": 40},
+	      {"name": "VBE","level": 40},
 	      {"name": "R","level": 5}
 	  ]
 	},
