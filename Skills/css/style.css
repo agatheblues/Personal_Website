@@ -1,0 +1,34 @@
+
+@font-face {
+font-family: BebasNeueRegular;
+src: url('font/BebasNeueRegular.otf') format('opentype');
+}
+@font-face {
+font-family: BebasNeueThin;
+src: url('font/BebasNeueThin.otf') format('opentype');
+}
+@font-face {
+font-family: BebasNeueLight;
+src: url('font/BebasNeueLight.otf') format('opentype');
+}
+
+
+svg {
+    margin: auto;
+    display:block;
+}
+
+.axis path, .axis line {
+    fill: none;
+    stroke: black;
+    stroke-width: 1;
+}
+
+.axis text {
+    font-family: Helvetica;
+    font-size: 10px;
+}
+
+rect {
+    fill : blue;
+}
