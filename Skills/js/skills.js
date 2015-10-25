@@ -60,6 +60,8 @@ var h = 500;
 var barHeight = 8;
 var paddingSection = 5;
 var paddingLeft = w/3;
+var sectionPosition = 0;
+var betweenSection = 20;
 
 var skills = d3.select('#chart')
 	            .append('svg')
@@ -89,7 +91,7 @@ dataset.forEach(function(item){
 			domain.push(skill.name);
 		});
 
-		var sectionHeight = (barHeight + paddingSection)*(item.skills.length); //Height of the section and inbetween. paddingSection needs to be in factor of the number of skills to represent;
+		var sectionHeight = (barHeight+ paddingSection)*(item.skills.length) + paddingSection; //Height of the section and inbetween. paddingSection needs to be in factor of the number of skills to represent;
 																			   //otherwise a section with few skills will have more whitespace than one with lot of skills.
 
 		//Create scale per section
@@ -120,7 +122,11 @@ var skillContainer = d3.select('#skills').selectAll('g')
 
 d3.selectAll('g.skillContainer').transition()
 	                .duration(1000)
-					.attr('transform',function(d,i){return 'translate(0,'+ i*h/dataset.length +')';});
+					.attr('transform',function(d,i){
+						//Position of the next section is the cumulated previous section heights
+						var curSectionPosition = sectionPosition;
+						sectionPosition += (barHeight + paddingSection)*(d.skills.length) + betweenSection; // previous section position + previous section height + a little bit of space between sections
+						return 'translate(0,'+ curSectionPosition +')';});
 
 //Create bars
 var skillBars = skillContainer.selectAll('g.bars')
