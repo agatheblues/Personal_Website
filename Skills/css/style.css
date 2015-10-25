@@ -18,8 +18,15 @@ svg {
     font-size: 10px;
 }
 
-
+.axis {
+    display : block;
+}
 
 .skillContainer {
     display : block;
+}
+
+line {
+    stroke : #1BBC9B;
+    stroke-width : 0.5px;
 }
