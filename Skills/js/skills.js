@@ -68,8 +68,8 @@ var skills = d3.select('#chart')
 	            .attr('width',w)
 	            .attr('height',h)
 					.append('g')
-					.attr("id","skills")
-					.attr('transform','translate('+ paddingLeft +',0)');
+					.attr("id","skills");
+					//.attr('transform','translate('+ paddingLeft +',0)');
 
 //Create scale X
 var xScale =  d3.scale.linear()
@@ -120,13 +120,23 @@ var skillContainer = d3.select('#skills').selectAll('g')
 												.append('g')
 												.attr('class','bars');
 
-d3.selectAll('g.skillContainer').transition()
-	                .duration(1000)
+
+d3.selectAll('g.skillContainer')
 					.attr('transform',function(d,i){
 						//Position of the next section is the cumulated previous section heights
 						var curSectionPosition = sectionPosition;
 						sectionPosition += (barHeight + paddingSection)*(d.skills.length) + betweenSection; // previous section position + previous section height + a little bit of space between sections
-						return 'translate(0,'+ curSectionPosition +')';});
+						return 'translate(0,'+ curSectionPosition +')';})
+					//Animation to move axis g.skillContainers to the right
+					.transition()
+	                .duration(1000)
+					.delay(function(d,i){
+						return i*100;
+					})
+					.attr('transform',function(d,i){
+						var currentY = d3.transform(d3.select(this).attr("transform")).translate[1]; //Get Y position
+						return 'translate('+ paddingLeft +','+ currentY +')';
+					});
 
 //Create bars
 var skillBars = skillContainer.selectAll('g.bars')
@@ -141,7 +151,7 @@ var skillBars = skillContainer.selectAll('g.bars')
 									.transition()
 						                .duration(1000)
 						                .delay(function(d,i){
-						                    return 950+i*50;
+						                    return 950+i*100;
 						                })
 										.attr("width", function(d){return xScale(d.level);});
 
