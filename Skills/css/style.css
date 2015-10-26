@@ -11,15 +11,29 @@ svg {
 .axis path, .axis line {
     fill: none;
     stroke: #ABB7B7;
-    stroke-width: 1;
+    stroke-width: 0.5px;
 }
 
 .axis text {
-    font-size: 10px;
+    font-size: 11px;
 }
 
-
+.axis {
+    display : block;
+}
 
 .skillContainer {
     display : block;
+}
+
+line, circle {
+    stroke : #1824F7;
+    stroke-width : 0.5px;
+}
+
+
+.sectionName {
+    text-transform: uppercase;
+    font-size: 13px;
+    fill: #3B3006;
 }
