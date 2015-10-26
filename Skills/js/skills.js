@@ -8,15 +8,15 @@ var dataset = [
 	      {"name": "Pancakes","level": 50}
 	  ]
   },
-	{
-	 "section": "Colors",
-	 "skills": [
-	      {"name": "Red","level": 90},
-	      {"name": "Orange","level": 100},
-	      {"name": "Yellow","level": 30},
-	      {"name": "White","level": 10}
-	  ]
-	},
+  {
+  	 "section": "Colors",
+  	 "skills": [
+  	      {"name": "Red","level": 90},
+  	      {"name": "Orange","level": 100},
+  	      {"name": "Yellow","level": 30},
+  	      {"name": "White","level": 10}
+  	  ]
+    },
 	{
 	 "section": "Animals",
 	 "skills": [
@@ -55,13 +55,13 @@ var dataset = [
 ];
 
 //Width and height
-var w = 600;
+var w = 700;
 var h = 500;
 var barHeight = 8;
 var paddingSection = 5;
-var radius = 150; //rayon*2+2*chartWdith =w if you want charts to adapt to width
 var paddingRadius = 25;
 var chartWidth = 100; //bar charts width
+var radius = 200; //rayon*2+2*chartWdith =w if you want charts to adapt to width
 
 var angles = [];
 var yScales = [];
@@ -83,10 +83,13 @@ var xScale =  d3.scale.linear()
                         .domain([0,100])
 						.range([0,chartWidth]);
 
-var colorScale=d3.scale.linear()
+var colorScaleG=d3.scale.linear()
                     .domain([0,100])
-                    .rangeRound([255,100]);
+                    .rangeRound([250,202]);
 
+var colorScaleB=d3.scale.linear()
+                    .domain([0,100])
+                    .rangeRound([200,24]);
 //Create one scale Y function for each section
 //yScales and yAxisDefs contain one scale per section
 
@@ -141,7 +144,7 @@ var skillBars = d3.selectAll('g.skillContainer').selectAll('g.bars').selectAll('
 				                   	.attr("y", function(d,i) { return yScales[d3.select(this.parentNode).datum().index](d.name); }) //i = index of the skills so 0 1 2 3 0 1 2 3 etc. We need the parent node index to call the same yScale for the whole section.
 				                   	.attr("height",barHeight) //function(d,i){ return yScales[d3.select(this.parentNode).datum().index].rangeBand();}
 				                   	.attr("width", 0)
-									.attr('fill',function(d){return 'rgb('+colorScale(d.level)+','+colorScale(d.level)+','+colorScale(d.level)+')';})
+									.attr('fill',function(d){return 'rgb(247,'+colorScaleG(d.level)+','+colorScaleB(d.level)+')';})
 									.transition()
 						                .duration(1000)
 						                .delay(function(d,i){
@@ -216,24 +219,52 @@ skillContainer.attr('opacity',0)
 var diameters = d3.select('g#diameters')
 							.attr('class','diameters')
 							.selectAll('line')
-							.data(dataset)
-							.enter()
-								.append('line')
-									.attr('x1',0)
-									.attr('y1',0)
-									.attr('x2',radius-paddingRadius)
-									.attr('y2',0)
-									.attr('opacity',0.5)
-									.attr('transform',function(d,i){
-										//Angle of container rotation
-										var angle = (360*i)/dataset.length-180 + 90;
-										return 'rotate('+angle+')';
-									})
-									.transition()
-									.duration(1000)
-									.attr('opacity',1)
-									.attr('transform',function(d,i){
-										//Angle of container rotation
-										var angle = ((360*i)/dataset.length-180);
-										return 'rotate('+angle+')';
-									});
+							.data(dataset);
+
+diameters.enter()
+			.append('line')
+				.attr('x1',0)
+				.attr('y1',0)
+				.attr('x2',0)
+				.attr('y2',0)
+				.attr('opacity',0.5)
+				.attr('transform',function(d,i){
+					//Angle of container rotation
+					var angle = ((360*i)/dataset.length-180);
+					return 'rotate('+angle+')';
+				})
+				.transition()
+				.duration(1000)
+					.attr('opacity',1)
+					.attr('x2',radius-paddingRadius);
+
+diameters.enter()
+			.append('text')
+			.attr('class','sectionName')
+			.text(function(d){return d.section;})
+			.attr('text-anchor',function(d,i){
+				//Angle of rotation
+				var angle = ((360*i)/dataset.length-180);
+				//If text is in right part of circle; anchor to the end so text ends as the line ends
+				return (angle<90 && angle>-90) ? 'end' : 'right';
+			})
+			.attr('opacity',0)
+			.attr('transform',function(d,i){
+				//Angle of container rotation
+				var angle = (360*i)/dataset.length-180;
+				return (angle<90 && angle>-90) ? 'rotate('+angle+')' : 'rotate('+angle+') rotate(180)';
+			})
+			.transition()
+			.duration(1500)
+				.attr('opacity',1)
+				.attr('transform',function(d,i){
+					//Angle of rotation
+					var angle = ((360*i)/dataset.length-180);
+					//If text is in left part of circle, flip text
+					return (angle<90 && angle>-90) ? 'rotate('+angle+') translate('+ (radius-paddingRadius) +',-5)' : 'rotate('+angle+') translate('+ (radius-paddingRadius) +',5)  rotate(180)';
+				});
+
+//Circle in the center
+d3.select('g#diameters').append('circle')
+						.attr('r',paddingRadius)
+						.attr('fill','white');
