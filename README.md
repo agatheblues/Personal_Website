@@ -1,4 +1,4 @@
-# d3-catbug
+# d3 small multiples positioned on a circle
 Again, playing around with d3!
 
 ## Timeline
